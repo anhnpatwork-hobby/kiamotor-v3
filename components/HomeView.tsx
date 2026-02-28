@@ -16,7 +16,7 @@ interface HomeViewProps {
 const HomeView: React.FC<HomeViewProps> = ({ onNavigate }) => {
   return (
     <>
-      <Hero />
+      <Hero onNavigate={onNavigate} />
       <BestSellers onNavigate={onNavigate} />
       <div id="finance"><FinanceSection /></div>
       <VideoGallery />
