@@ -8,12 +8,22 @@ import InstallmentView from './components/InstallmentView';
 import ContactView from './components/ContactView';
 import Footer from './components/Footer';
 import MobileStickyBar from './components/MobileStickyBar';
+import PopupForm from './components/PopupForm';
 
 export type PageView = 'home' | 'products' | 'product-detail' | 'pricing' | 'finance' | 'contact';
 
 const App: React.FC = () => {
   const [currentView, setCurrentView] = useState<PageView>('home');
   const [selectedCarId, setSelectedCarId] = useState<string | null>(null);
+  const [showPopup, setShowPopup] = useState(false);
+
+  useEffect(() => {
+    // Show popup after 4 seconds of initial load
+    const timer = setTimeout(() => {
+      setShowPopup(true);
+    }, 4000);
+    return () => clearTimeout(timer);
+  }, []);
 
   const navigateTo = (view: PageView, id?: string) => {
     window.scrollTo(0, 0);
@@ -47,7 +57,7 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen bg-white">
       <Header onNavigate={navigateTo} currentView={currentView} />
-      
+
       <main>
         {currentView === 'home' && (
           <HomeView onNavigate={navigateTo} />
@@ -71,6 +81,7 @@ const App: React.FC = () => {
 
       <Footer onNavigate={navigateTo} />
       <MobileStickyBar />
+      <PopupForm isOpen={showPopup} onClose={() => setShowPopup(false)} />
     </div>
   );
 };
