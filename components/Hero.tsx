@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { CONTACT_INFO } from '../constants';
+import { PageView } from '../App';
 
 const HERO_IMAGES = [
   '/images/banner_web .jpg',
@@ -7,7 +8,11 @@ const HERO_IMAGES = [
   '/images/banner_web 3.jpg'
 ];
 
-const Hero: React.FC = () => {
+interface HeroProps {
+  onNavigate: (view: PageView, id?: string) => void;
+}
+
+const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
@@ -52,12 +57,15 @@ const Hero: React.FC = () => {
               >
                 NHẬN BÁO GIÁ
               </a>
-              <a
-                href="#products"
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  onNavigate('products');
+                }}
                 className="w-full sm:w-auto bg-transparent border border-gray-600 text-white font-bold text-base px-10 py-4 rounded-full hover:bg-white hover:text-black hover:border-white transition-all duration-300 uppercase tracking-wide inline-flex items-center justify-center"
               >
                 XEM DÒNG XE
-              </a>
+              </button>
             </div>
           </div>
 
