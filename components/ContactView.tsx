@@ -29,17 +29,22 @@ const ContactView: React.FC = () => {
 
     setIsSubmitting(true);
     try {
-      await submitToSheet({
-        Name: formData.name,
-        Phone: formData.phone,
-        Car: formData.car,
-        Type: formData.content,
-        Message: formData.message
-      });
-      alert(`Cảm ơn ${formData.name}! Yêu cầu của bạn đã được lưu. Tư vấn viên sẽ xem và phản hồi ngay.`);
-      setFormData({ name: '', phone: '', car: '', content: 'Báo giá lăn bánh', message: '' });
+      const subject = `Yêu cầu tư vấn xe từ ${formData.name}`;
+      const body = `Chào ${CONTACT_INFO.consultantName}, tôi muốn nhận tư vấn xe.
+
+Thông tin khách hàng:
+- Họ tên: ${formData.name}
+- SĐT: ${formData.phone}
+- Dòng xe quan tâm: ${formData.car || 'Chưa xác định'}
+- Nội dung hỗ trợ: ${formData.content}
+- Lời nhắn: ${formData.message || 'Không có'}`;
+
+      window.location.href = `mailto:${CONTACT_INFO.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+      // Optionally clear form
+      // setFormData({ name: '', phone: '', car: '', content: 'Báo giá lăn bánh', message: '' });
     } catch (error) {
-      alert('Lỗi gửi hồ sơ. Vui lòng gọi trực tiếp Hotline!');
+      alert('Lỗi khởi tạo Email. Vui lòng gọi trực tiếp Hotline!');
       console.error(error);
     } finally {
       setIsSubmitting(false);
