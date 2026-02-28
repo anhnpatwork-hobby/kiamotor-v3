@@ -35,14 +35,16 @@ const PopupForm: React.FC<PopupFormProps> = ({ isOpen, onClose }) => {
             return;
         }
 
-        const message = `Chào ${CONTACT_INFO.consultantName}, tôi muốn nhận tư vấn xe.
-Họ tên: ${formData.name || 'Không cung cấp'}
-SĐT: ${formData.phone}
-Tầm tiền: ${formData.budget || 'Chưa xác định'}
-Dòng xe quan tâm: ${formData.carModel || 'Chưa xác định'}`;
+        const subject = `Yêu cầu tư vấn xe từ ${formData.name || 'Khách hàng'}`;
+        const body = `Chào ${CONTACT_INFO.consultantName}, tôi muốn nhận tư vấn xe.
 
-        const zaloUrl = `https://zalo.me/${CONTACT_INFO.phone.replace(/\./g, '')}?text=${encodeURIComponent(message)}`;
-        window.open(zaloUrl, '_blank');
+Thông tin khách hàng:
+- Họ tên: ${formData.name || 'Không cung cấp'}
+- SĐT: ${formData.phone}
+- Tầm tiền: ${formData.budget || 'Chưa xác định'}
+- Dòng xe quan tâm: ${formData.carModel || 'Chưa xác định'}`;
+
+        window.location.href = `mailto:${CONTACT_INFO.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
         onClose();
     };
 
