@@ -236,7 +236,7 @@ END:VCARD`;
                           type="text"
                           value={formData.name}
                           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                          className="w-full p-3 sm:p-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-kia-red focus:bg-white font-bold text-gray-900 transition-all text-sm sm:text-base"
+                          className="w-full p-3 sm:p-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-kia-red focus:bg-white font-bold text-gray-900 transition-all text-base"
                           placeholder="Nhập tên của bạn"
                         />
                       </div>
@@ -246,7 +246,7 @@ END:VCARD`;
                           type="tel"
                           value={formData.phone}
                           onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                          className="w-full p-3 sm:p-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-kia-red focus:bg-white font-bold text-gray-900 transition-all text-sm sm:text-base"
+                          className="w-full p-3 sm:p-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-kia-red focus:bg-white font-bold text-gray-900 transition-all text-base"
                           placeholder="09xx..."
                         />
                       </div>
@@ -259,7 +259,7 @@ END:VCARD`;
                           <select
                             value={formData.car}
                             onChange={(e) => setFormData({ ...formData, car: e.target.value })}
-                            className="w-full p-3 sm:p-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-kia-red focus:bg-white font-medium text-gray-900 appearance-none cursor-pointer text-sm sm:text-base"
+                            className="w-full p-3 sm:p-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-kia-red focus:bg-white font-medium text-gray-900 appearance-none cursor-pointer text-base"
                           >
                             <option value="">Chọn dòng xe...</option>
                             {CAR_MODELS.map(car => (
@@ -275,7 +275,7 @@ END:VCARD`;
                           <select
                             value={formData.content}
                             onChange={(e) => setFormData({ ...formData, content: e.target.value })}
-                            className="w-full p-3 sm:p-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-kia-red focus:bg-white font-medium text-gray-900 appearance-none cursor-pointer text-sm sm:text-base"
+                            className="w-full p-3 sm:p-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-kia-red focus:bg-white font-medium text-gray-900 appearance-none cursor-pointer text-base"
                           >
                             <option>Báo giá lăn bánh</option>
                             <option>Đăng ký lái thử</option>
@@ -294,7 +294,7 @@ END:VCARD`;
                         rows={3}
                         value={formData.message}
                         onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                        className="w-full p-3 sm:p-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-kia-red focus:bg-white text-gray-900 transition-all text-sm sm:text-base"
+                        className="w-full p-3 sm:p-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-kia-red focus:bg-white text-gray-900 transition-all text-base"
                         placeholder="VD: Tôi muốn lái thử vào cuối tuần này..."
                       ></textarea>
                     </div>
