@@ -10,9 +10,9 @@ interface FloatingToolProps {
 
 const FloatingTool: React.FC<FloatingToolProps> = ({ onNavigate }) => {
   return (
-    <div className="container mx-auto px-4 relative z-30 -mt-24 mb-16">
-      <div className="bg-white rounded-lg shadow-[0_20px_50px_rgba(0,0,0,0.15)] p-6 md:p-8 border border-gray-100">
-        <div className="flex flex-col lg:flex-row items-end gap-4 lg:gap-6">
+    <div className="container mx-auto px-4 relative z-30 -mt-12 md:-mt-24 mb-10 md:mb-16">
+      <div className="bg-white rounded-lg shadow-[0_20px_50px_rgba(0,0,0,0.15)] p-5 md:p-8 border border-gray-100">
+        <div className="flex flex-col lg:flex-row items-end gap-4 md:gap-6">
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6 w-full">
             {/* Select Model */}
