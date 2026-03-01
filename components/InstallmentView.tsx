@@ -1,5 +1,4 @@
 import React, { useState, useMemo } from 'react';
-import { submitToSheet } from '../src/utils/sheetService';
 import { CONTACT_INFO, CAR_MODELS } from '../constants';
 import {
   FileSignature,
@@ -22,33 +21,26 @@ const InstallmentView: React.FC = () => {
 
   // Form logic
   const [formData, setFormData] = useState({ name: '', phone: '', income: '', loanAmount: '' });
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmitForm = async (e: React.FormEvent) => {
+  const handleSubmitForm = (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.phone) {
       alert('Vui lòng nhập đầy đủ thông tin!');
       return;
     }
 
-    setIsSubmitting(true);
-    try {
-      await submitToSheet({
-        Name: formData.name,
-        Phone: formData.phone,
-        Income: formData.income,
-        LoanAmount: formData.loanAmount,
-        Type: 'Thẩm định hồ sơ trả góp',
-        Message: `Thu nhập: ${formData.income}, Muốn vay: ${formData.loanAmount}`
-      });
-      alert(`Đã lưu hồ sơ của ${formData.name}! Chúng tôi sẽ bảo mật và gọi lại tư vấn chi tiết.`);
-      setFormData({ name: '', phone: '', income: '', loanAmount: '' });
-    } catch (error) {
-      alert('Lỗi gửi hồ sơ. Vui lòng gọi trực tiếp Hotline!');
-      console.error(error);
-    } finally {
-      setIsSubmitting(false);
-    }
+    const subject = `Yêu cầu thẩm định hồ sơ trả góp từ ${formData.name}`;
+    const body = `Chào ${CONTACT_INFO.consultantName}, tôi muốn được thẩm định hồ sơ vay mua xe trả góp.
+
+Thông tin khách hàng:
+- Họ tên: ${formData.name}
+- SĐT: ${formData.phone}
+- Thu nhập hằng tháng: ${formData.income || 'Chưa xác định'}
+- Khoản vay dự kiến: ${formData.loanAmount || 'Chưa xác định'}
+
+Mong nhận được tư vấn chi tiết từ bạn. Cảm ơn!`;
+
+    window.location.href = `mailto:${CONTACT_INFO.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
 
 
@@ -456,50 +448,50 @@ const InstallmentView: React.FC = () => {
               <div className="lg:w-1/2 p-6 sm:p-12 bg-white">
                 <form className="space-y-4 sm:space-y-5" onSubmit={handleSubmitForm}>
                   <div>
-                    <label className="block text-[10px] sm:text-xs font-bold uppercase text-gray-500 mb-1">Họ tên</label>
+                    <label className="block text-xs sm:text-sm font-bold uppercase text-gray-500 mb-1">Họ tên</label>
                     <input
                       type="text"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full p-3 sm:p-4 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-kia-red font-bold text-gray-900 text-sm sm:text-base"
+                      className="w-full p-3 sm:p-4 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-kia-red font-bold text-gray-900 text-base"
                       placeholder="Họ của anh/chị"
                     />
                   </div>
                   <div>
-                    <label className="block text-[10px] sm:text-xs font-bold uppercase text-gray-500 mb-1">Số điện thoại</label>
+                    <label className="block text-xs sm:text-sm font-bold uppercase text-gray-500 mb-1">Số điện thoại</label>
                     <input
                       type="tel"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full p-3 sm:p-4 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-kia-red font-bold text-gray-900 text-sm sm:text-base"
+                      className="w-full p-3 sm:p-4 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-kia-red font-bold text-gray-900 text-base"
                       placeholder="09xx..."
                     />
                   </div>
-                  <div className="grid grid-cols-2 gap-3 sm:gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-[10px] sm:text-xs font-bold uppercase text-gray-500 mb-1">Thu nhập (VD: 20tr)</label>
+                      <label className="block text-xs sm:text-sm font-bold uppercase text-gray-500 mb-1">Thu nhập (VD: 20tr)</label>
                       <input
                         type="text"
                         value={formData.income}
                         onChange={(e) => setFormData({ ...formData, income: e.target.value })}
-                        className="w-full p-3 sm:p-4 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-kia-red font-bold text-gray-900 text-xs sm:text-sm"
+                        className="w-full p-3 sm:p-4 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-kia-red font-bold text-gray-900 text-base"
                         placeholder="Thu nhập"
                       />
                     </div>
                     <div>
-                      <label className="block text-[10px] sm:text-xs font-bold uppercase text-gray-500 mb-1">Số tiền vay (VD: 400tr)</label>
+                      <label className="block text-xs sm:text-sm font-bold uppercase text-gray-500 mb-1">Số tiền vay (VD: 400tr)</label>
                       <input
                         type="text"
                         value={formData.loanAmount}
                         onChange={(e) => setFormData({ ...formData, loanAmount: e.target.value })}
-                        className="w-full p-3 sm:p-4 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-kia-red font-bold text-gray-900 text-xs sm:text-sm"
+                        className="w-full p-3 sm:p-4 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-kia-red font-bold text-gray-900 text-base"
                         placeholder="Khoản vay"
                       />
                     </div>
                   </div>
 
                   <button className="w-full bg-blue-600 text-white font-bold py-3.5 sm:py-4 rounded-xl uppercase tracking-wide hover:bg-blue-700 transition-colors shadow-lg shadow-blue-200 flex items-center justify-center gap-2 mt-4 text-sm sm:text-base">
-                    {isSubmitting ? 'Đang gửi...' : 'Kiểm Tra Hồ Sơ Ngay'}
+                    Kiểm Tra Hồ Sơ Ngay
                     <ArrowRight className="w-5 h-5" />
                   </button>
                   <p className="text-center text-[10px] text-gray-400 mt-4 flex items-center justify-center gap-1">
