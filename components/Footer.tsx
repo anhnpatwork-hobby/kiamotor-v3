@@ -14,7 +14,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   };
 
   return (
-    <footer className="bg-black text-white pt-12 sm:pt-16 pb-8 border-t border-gray-900">
+    <footer className="bg-black text-white pt-12 sm:pt-16 pb-24 lg:pb-8 border-t border-gray-900">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 sm:gap-12 mb-10 sm:mb-12 text-center sm:text-left">
 
