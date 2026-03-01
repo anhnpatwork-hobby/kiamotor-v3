@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { CONTACT_INFO, CAR_MODELS, PRICING_BY_MODEL } from '../constants';
 import { PageView } from '../App';
 import { AlertTriangle, ArrowRight, MessageCircle, FileSpreadsheet, CheckCircle2 } from 'lucide-react';
@@ -16,6 +16,27 @@ const getCarImage = (id: string) => {
 
 
 const PricingView: React.FC<PricingViewProps> = ({ onNavigate }) => {
+  const [formData, setFormData] = useState({ name: '', phone: '', carModel: '' });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formData.name || !formData.phone) {
+      alert('Vui lòng nhập Họ tên và Số điện thoại!');
+      return;
+    }
+    const subject = `Yêu cầu báo giá lăn bánh từ ${formData.name}`;
+    const body = `Chào ${CONTACT_INFO.consultantName}, tôi muốn nhận báo giá lăn bánh.
+
+Thông tin khách hàng:
+- Họ tên: ${formData.name}
+- SĐT Zalo: ${formData.phone}
+- Dòng xe quan tâm: ${formData.carModel || 'Chưa xác định'}
+
+Vui lòng gửi bảng tính chi tiết qua Zalo cho tôi. Cảm ơn!`;
+
+    window.location.href = `mailto:${CONTACT_INFO.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  };
+
   return (
     <div className="pt-20 min-h-screen bg-gray-50 animate-fade-in font-sans">
 
@@ -175,25 +196,33 @@ const PricingView: React.FC<PricingViewProps> = ({ onNavigate }) => {
               Chúng tôi sẽ gửi bảng tính chi tiết (File Excel/Ảnh) bao gồm cả phí dịch vụ đăng ký trọn gói qua Zalo cho anh/chị ngay lập tức.
             </p>
 
-            <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+            <form className="space-y-3 sm:space-y-4" onSubmit={handleSubmit}>
               <input
                 type="text"
+                value={formData.name}
+                onChange={(e) => setFormData(p => ({ ...p, name: e.target.value }))}
                 placeholder="Họ tên của bạn"
-                className="w-full p-4 rounded-lg bg-black/50 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-kia-red focus:ring-1 focus:ring-kia-red transition-all"
+                className="w-full p-3.5 sm:p-4 rounded-xl bg-black/50 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-kia-red focus:ring-1 focus:ring-kia-red transition-all text-sm sm:text-base"
               />
               <input
                 type="tel"
+                value={formData.phone}
+                onChange={(e) => setFormData(p => ({ ...p, phone: e.target.value }))}
                 placeholder="Số điện thoại Zalo"
-                className="w-full p-4 rounded-lg bg-black/50 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-kia-red focus:ring-1 focus:ring-kia-red transition-all"
+                className="w-full p-3.5 sm:p-4 rounded-xl bg-black/50 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-kia-red focus:ring-1 focus:ring-kia-red transition-all text-sm sm:text-base"
               />
-              <select className="w-full p-4 rounded-lg bg-black/50 border border-gray-700 text-white focus:outline-none focus:border-kia-red focus:ring-1 focus:ring-kia-red transition-all appearance-none cursor-pointer">
-                <option className="text-gray-500">Dòng xe quan tâm...</option>
+              <select
+                value={formData.carModel}
+                onChange={(e) => setFormData(p => ({ ...p, carModel: e.target.value }))}
+                className="w-full p-3.5 sm:p-4 rounded-xl bg-black/50 border border-gray-700 text-white focus:outline-none focus:border-kia-red focus:ring-1 focus:ring-kia-red transition-all appearance-none cursor-pointer text-sm sm:text-base"
+              >
+                <option className="text-gray-500" value="">Dòng xe quan tâm...</option>
                 {PRICING_BY_MODEL.flatMap(g => g.models).map((m, idx) => (
-                  <option key={idx} value={m.name} className="text-black">{m.name}</option>
+                  <option key={idx} value={m.name} className="text-black bg-white">{m.name}</option>
                 ))}
               </select>
 
-              <button className="w-full bg-kia-red hover:bg-red-700 text-white font-bold py-4 rounded-lg uppercase tracking-wider transition-all shadow-lg shadow-red-900/20 flex items-center justify-center gap-2 mt-4">
+              <button className="w-full bg-kia-red hover:bg-red-700 text-white font-bold py-3.5 sm:py-4 rounded-xl uppercase tracking-wider transition-all shadow-lg shadow-red-900/20 flex items-center justify-center gap-2 mt-4 text-sm sm:text-base">
                 Gửi Yêu Cầu Ngay
                 <ArrowRight className="w-5 h-5" />
               </button>
