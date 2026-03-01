@@ -62,7 +62,7 @@ Thông tin khách hàng:
             />
 
             {/* Modal Content */}
-            <div className="relative w-full max-w-4xl bg-white rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row animate-in fade-in zoom-in duration-300">
+            <div className="relative w-full max-w-4xl max-h-[95vh] overflow-y-auto bg-white rounded-2xl md:rounded-3xl shadow-2xl flex flex-col md:flex-row animate-in fade-in zoom-in duration-300">
 
                 {/* Close Button */}
                 <button
@@ -73,23 +73,23 @@ Thông tin khách hàng:
                 </button>
 
                 {/* Left Panel - Red */}
-                <div className="w-full md:w-5/12 bg-kia-red p-8 md:p-12 flex flex-col justify-center text-white">
-                    <h2 className="text-3xl md:text-4xl font-black uppercase mb-6 leading-tight">
+                <div className="w-full md:w-5/12 bg-kia-red p-6 md:p-12 flex flex-col justify-center text-white">
+                    <h2 className="text-2xl md:text-3xl lg:text-4xl font-black uppercase mb-3 md:mb-6 leading-tight">
                         BẠN VẪN PHÂN<br />
                         VÂN CHƯA CHỌN<br />
                         ĐƯỢC XE?
                     </h2>
-                    <p className="text-lg text-white/90 leading-relaxed font-medium">
+                    <p className="text-sm md:text-lg text-white/90 leading-relaxed font-medium">
                         Đừng lo, hãy để lại thông tin. Chuyên gia tư vấn sẽ gọi lại hỗ trợ bạn tìm ra chiếc xe phù hợp nhất với ngân sách trong 5 phút.
                     </p>
                 </div>
 
                 {/* Right Panel - Form */}
-                <div className="w-full md:w-7/12 p-8 md:p-12 bg-gray-50">
-                    <form onSubmit={handleSubmit} className="space-y-6">
-                        <div className="flex flex-col md:flex-row gap-6">
+                <div className="w-full md:w-7/12 p-6 md:p-12 bg-gray-50">
+                    <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
+                        <div className="flex flex-col md:flex-row gap-4 md:gap-6">
                             <div className="flex-1 space-y-2">
-                                <label className="block text-sm font-bold text-gray-600 uppercase tracking-wide">
+                                <label className="block text-xs md:text-sm font-bold text-gray-600 uppercase tracking-wide">
                                     Họ tên
                                 </label>
                                 <input
@@ -98,11 +98,11 @@ Thông tin khách hàng:
                                     value={formData.name}
                                     onChange={handleChange}
                                     placeholder="Nhập họ tên"
-                                    className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-kia-red focus:border-transparent transition-all outline-none"
+                                    className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-kia-red focus:border-transparent transition-all outline-none text-sm md:text-base"
                                 />
                             </div>
                             <div className="flex-1 space-y-2">
-                                <label className="block text-sm font-bold text-gray-600 uppercase tracking-wide">
+                                <label className="block text-xs md:text-sm font-bold text-gray-600 uppercase tracking-wide">
                                     Số điện thoại <span className="text-kia-red">*</span>
                                 </label>
                                 <input
@@ -112,20 +112,20 @@ Thông tin khách hàng:
                                     value={formData.phone}
                                     onChange={handleChange}
                                     placeholder="Nhập SĐT"
-                                    className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-kia-red focus:border-transparent transition-all outline-none"
+                                    className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-kia-red focus:border-transparent transition-all outline-none text-sm md:text-base"
                                 />
                             </div>
                         </div>
 
                         <div className="space-y-2">
-                            <label className="block text-sm font-bold text-gray-600 uppercase tracking-wide">
+                            <label className="block text-xs md:text-sm font-bold text-gray-600 uppercase tracking-wide">
                                 Tầm tiền dự kiến
                             </label>
                             <select
                                 name="budget"
                                 value={formData.budget}
                                 onChange={handleChange}
-                                className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-kia-red focus:border-transparent transition-all outline-none text-gray-700"
+                                className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-kia-red focus:border-transparent transition-all outline-none text-gray-700 text-sm md:text-base"
                             >
                                 <option value="">Chọn tầm tiền dự kiến</option>
                                 <option value="Dưới 500 Triệu">Dưới 500 Triệu</option>
@@ -136,14 +136,14 @@ Thông tin khách hàng:
                         </div>
 
                         <div className="space-y-2">
-                            <label className="block text-sm font-bold text-gray-600 uppercase tracking-wide">
+                            <label className="block text-xs md:text-sm font-bold text-gray-600 uppercase tracking-wide">
                                 Dòng xe quan tâm
                             </label>
                             <select
                                 name="carModel"
                                 value={formData.carModel}
                                 onChange={handleChange}
-                                className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-kia-red focus:border-transparent transition-all outline-none text-gray-700"
+                                className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-kia-red focus:border-transparent transition-all outline-none text-gray-700 text-sm md:text-base"
                             >
                                 <option value="">Chọn dòng xe (Tùy chọn)</option>
                                 {CAR_MODELS.map(car => (
@@ -154,7 +154,7 @@ Thông tin khách hàng:
 
                         <button
                             type="submit"
-                            className="w-full flex items-center justify-center gap-3 bg-black text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-gray-800 transition-all duration-300 shadow-xl mt-4"
+                            className="w-full flex items-center justify-center gap-3 bg-black text-white px-8 py-3.5 md:py-4 rounded-xl font-bold text-sm md:text-lg hover:bg-gray-800 transition-all duration-300 shadow-xl mt-4"
                         >
                             <span>GỬI YÊU CẦU TƯ VẤN</span>
                             <ArrowRight className="w-5 h-5" />
