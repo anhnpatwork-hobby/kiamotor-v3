@@ -1,5 +1,11 @@
 import { LucideIcon } from 'lucide-react';
 
+declare global {
+  interface Window {
+    gtag: (command: string, action: string, params?: any) => void;
+  }
+}
+
 export interface CarModel {
   id: string;
   name: string;
