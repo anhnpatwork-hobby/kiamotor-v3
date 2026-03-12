@@ -41,6 +41,11 @@ Thông tin khách hàng:
 
       window.location.href = `mailto:${CONTACT_INFO.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
+      // Google Ads Conversion tracking
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', 'conversion', { 'send_to': 'AW-17987510976/aI_tCMKp1IEcEMDFjoFD' });
+      }
+
       // Optionally clear form
       // setFormData({ name: '', phone: '', car: '', content: 'Báo giá lăn bánh', message: '' });
     } catch (error) {
