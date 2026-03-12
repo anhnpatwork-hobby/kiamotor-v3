@@ -45,6 +45,12 @@ Thông tin khách hàng:
 - Dòng xe quan tâm: ${formData.carModel || 'Chưa xác định'}`;
 
         window.location.href = `mailto:${CONTACT_INFO.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+        // Google Ads Conversion tracking
+        if (typeof window.gtag === 'function') {
+            window.gtag('event', 'conversion', { 'send_to': 'AW-17987510976/aI_tCMKp1IEcEMDFjoFD' });
+        }
+
         onClose();
     };
 
